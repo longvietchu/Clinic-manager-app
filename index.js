@@ -16,7 +16,7 @@ function showMenu() {
 	console.log('1. Show all patients today');
 	console.log('2. Create a new patients');
 	console.log('3. Delete a patient');
-	console.log('4. Save & Exit');
+	console.log('4. Save');
 	console.log('5. Exit');
 	var option = readlineSync.question('> ');
 
@@ -34,7 +34,8 @@ function showMenu() {
 			showMenu();
 			break;	
 		case '4':
-			saveAndExit();
+			save();
+			showMenu();
 			break;
 		case '5':
 			break;
@@ -68,11 +69,10 @@ function showCreatePatient() {
 
 function showDeletePatient() {
 	var delNumber = readlineSync.question('Number of patient(from 0): ');
-	var delPatient = parseInt(delNumber);
-	patients.splice(delPatient);
+	patients.splice(parseInt(delNumber));
 }
 
-function saveAndExit() {
+function save() {
 	var content = JSON.stringify(patients);
 	fs.writeFileSync('./data.json', content, {encoding: 'utf8'});
 }
